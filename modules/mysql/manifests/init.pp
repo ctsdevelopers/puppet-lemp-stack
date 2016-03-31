@@ -1,7 +1,7 @@
 class mysql {
 
   # root mysql password
-  $mysqlpw = "d3v0p5"
+  $mysqlpw = "SETYOURPASSWORD"
 
   # install mysql server
   package { "mysql-server":
@@ -21,4 +21,18 @@ class mysql {
     command => "mysqladmin -uroot password $mysqlpw",
     require => Service["mysql"],
   }
+
+  # get mysql file
+  file { "/tmp/inserts.sql":
+    ensure => present,
+    source => "/vagrant/manifests/inserts.sql",
+    require => Exec["set-mysql-password"],
+  }
+
+  # create db schema
+  exec { "set-db-schema":
+    command => "mysql -u root -p$mysqlpw < /tmp/inserts.sql",
+    require => File["/tmp/inserts.sql"],
+  }
+
 }
