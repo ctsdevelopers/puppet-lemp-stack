@@ -23,7 +23,8 @@ Vagrant.configure("2") do |config|
 
 # Use the following for NFS
 #config.vm.network "private_network", ip: "172.28.128.110"
-#config.vm.synced_folder "YOUR-LOCAL-DIR", "/var/www/my-site/",  :nfs => true
+#config.vm.synced_folder "/CHANGE/TO/LOCAL/DIR", "/var/www/my-site/",  :nfs => true
+# non-nfs
+config.vm.synced_folder "/CHANGE/TO/LOCAL/DIR", "/var/www/my-site/", owner: "www-data", group: "www-data"
 
-config.vm.synced_folder "YOUR-LOCAL-DIR", "/var/www/my-site/", owner: "www-data", group: "www-data"
 end

@@ -1,7 +1,7 @@
 class mysql {
 
-  # root mysql password
-  $mysqlpw = "SETYOURPASSWORD"
+  # root mysql password (CHANGE YOUR PASS HERE)
+  $mysqlpw = "root"
 
   # install mysql server
   package { "mysql-server":
